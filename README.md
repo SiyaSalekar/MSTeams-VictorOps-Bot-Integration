@@ -4,6 +4,10 @@
 
 ![requirements](bot/images/requirement.png)
 
+## Study : Command Parameters
+
+![createIncident](bot/images/params.png)
+
 ## Feature 1 - Create incident in VictorOps
 
 ![createIncident](bot/images/featureOne.png)
