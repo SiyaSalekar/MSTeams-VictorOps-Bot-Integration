@@ -83,8 +83,6 @@ class TeamsBot extends TeamsActivityHandler {
 
         }
 
-        // By calling next() you ensure that the next BotHandler is run.
-        await next();
       }
 
     });
