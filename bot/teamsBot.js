@@ -37,7 +37,9 @@ class TeamsBot extends TeamsActivityHandler {
           //payload
           const data = {
             summary: detail_string,
-            details: detail_string
+            details: detail_string,
+            message_type: 'CRITICAL',
+            entity_display_name: param2
           };
 
           //looping through each routingKey - creating a new incident for each routing key
@@ -46,6 +48,8 @@ class TeamsBot extends TeamsActivityHandler {
               url: ``,
               method: 'POST',
               headers: {
+                'X-VO-Api-Id': 'YOUR_API_ID',
+                'X-VO-Api-Key': 'YOUR_API_KEY',
                 'Content-Type': 'application/json'
               },
               json: true,
