@@ -30,6 +30,7 @@ class TeamsBot extends TeamsActivityHandler {
 
           //reads n number of routing keys(teams) entered by user
           const request = require('request');
+          const routingKeys = [param1sub[0], param1sub[1]];
           for (let i = 2; i < param1sub.length; i++) {
             routingKeys.push(param1sub[i]);
           }
