@@ -31,7 +31,7 @@ class TeamsBot extends TeamsActivityHandler {
           //details of incident
           const param3 = params.slice(3);
           const detail_string = param3.join(" ");
-          
+
           //reads n number of routing keys(teams) entered by user
           const request = require('request');
           const routingKeys = [param1sub[0], param1sub[1]];
@@ -87,7 +87,6 @@ class TeamsBot extends TeamsActivityHandler {
           const teams = response.data.map(team => team.name).join('<br>');
 
           // Send the team names back to the user
-          //Test
           await context.sendActivity(`Note: All the teams below are case sensitive. If you enter INCORRECT routing key, default escalation - Test Team Policy. <br> The following VictorOps teams are available: <br> ${teams}`);
 
         }
