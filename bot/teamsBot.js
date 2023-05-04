@@ -13,26 +13,70 @@ class TeamsBot extends TeamsActivityHandler {
     this.likeCountObj = { likeCount: 0 };
 
     this.onMessage(async (context, next) => {
+      if (context.activity.type === 'message') {
 
-      //FEATURE - SHOW TEAMS IN VICTOROPS under the Vesta org
-      if (context.activity.text === '/vops-show-teams') {
+        const command = context.activity.text;
 
-        const VICTOROPS_API_URL = 'https://api.victorops.com/api-public/v1';
+        //FEATURE 1 - ESCALATE to specific teams enetred by user CREATE INCIDENT in vops timeline
+        if (command.startsWith('/vops-escalate')) {
+          // Params
+          const params = command.split(' ');
 
-        const response = await axios.get(`${VICTOROPS_API_URL}/team`, {
-          headers: { 'X-VO-Api-Id': '<YOUR_API_ID>', 'X-VO-Api-Key': 'YOUR_API_KEY' }
-        });
+          //reads n number of routing keys(teams) entered by user
+          const request = require('request');
+          for (let i = 2; i < param1sub.length; i++) {
+            routingKeys.push(param1sub[i]);
+          }
 
-        // Extract the team names from the response
-        const teams = response.data.map(team => team.name).join('<br>');
+          //payload
+          const data = {
+            summary: detail_string,
+            details: detail_string
+          };
 
-        // Send the team names back to the user
-        await context.sendActivity(`Note: All the teams below are case sensitive. If you enter INCORRECT routing key, default escalation - Test Team Policy. <br> The following VictorOps teams are available: <br> ${teams}`);
+          //looping through each routingKey - creating a new incident for each routing key
+          routingKeys.forEach((routingKey) => {
+            const options = {
+              url: ``,
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              json: true,
+              body: data
+            };
 
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+              console.log(body);
+            });
+          });
+
+        }
+
+
+
+        //FEATURE 2 - SHOW TEAMS IN VICTOROPS under the Vesta org
+        if (context.activity.text === '/vops-show-teams') {
+
+          const VICTOROPS_API_URL = 'https://api.victorops.com/api-public/v1';
+
+          const response = await axios.get(`${VICTOROPS_API_URL}/team`, {
+            headers: { 'X-VO-Api-Id': '<YOUR_API_ID>', 'X-VO-Api-Key': 'YOUR_API_KEY' }
+          });
+
+          // Extract the team names from the response
+          const teams = response.data.map(team => team.name).join('<br>');
+
+          // Send the team names back to the user
+          await context.sendActivity(`Note: All the teams below are case sensitive. If you enter INCORRECT routing key, default escalation - Test Team Policy. <br> The following VictorOps teams are available: <br> ${teams}`);
+
+        }
+
+        // By calling next() you ensure that the next BotHandler is run.
+        await next();
       }
 
-      // By calling next() you ensure that the next BotHandler is run.
-      await next();
     });
 
     // Listen to MembersAdded event, view https://docs.microsoft.com/en-us/microsoftteams/platform/resources/bot-v3/bots-notifications for more events
