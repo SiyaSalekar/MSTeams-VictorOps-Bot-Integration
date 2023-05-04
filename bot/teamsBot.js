@@ -83,6 +83,7 @@ class TeamsBot extends TeamsActivityHandler {
           const teams = response.data.map(team => team.name).join('<br>');
 
           // Send the team names back to the user
+          //Test
           await context.sendActivity(`Note: All the teams below are case sensitive. If you enter INCORRECT routing key, default escalation - Test Team Policy. <br> The following VictorOps teams are available: <br> ${teams}`);
 
         }
