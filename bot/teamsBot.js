@@ -63,6 +63,9 @@ class TeamsBot extends TeamsActivityHandler {
             });
           });
 
+          //test
+          await context.sendActivity(`You want to escalate to ${param1} which is - ${param1sub[0]} snd ${param1sub[1]}, escalation title - ${param2} and detaisl of incident - ${detail_string}`);
+
         }
 
 
