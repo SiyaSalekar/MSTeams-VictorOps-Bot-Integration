@@ -22,6 +22,12 @@ class TeamsBot extends TeamsActivityHandler {
           // Params
           const params = command.split(' ');
 
+          const param1 = params[1];
+          const param1sub = params[1].split(';');
+          const param2 = params[2];
+          const param3 = params.slice(3);
+          const detail_string = param3.join(" ");
+
           //reads n number of routing keys(teams) entered by user
           const request = require('request');
           for (let i = 2; i < param1sub.length; i++) {
