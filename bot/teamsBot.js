@@ -17,7 +17,7 @@ class TeamsBot extends TeamsActivityHandler {
 
         const command = context.activity.text;
 
-        //FEATURE 1 - ESCALATE to specific teams enetred by user CREATE INCIDENT in vops timeline
+        //FEATURE 1 - ESCALATE to specific teams enetred by user CREATE INCIDENT in VOps timeline
         if (command.startsWith('/vops-escalate')) {
           // Extract parameters from the command
           const params = command.split(' ');
@@ -39,7 +39,7 @@ class TeamsBot extends TeamsActivityHandler {
             routingKeys.push(param1sub[i]);
           }
 
-          //payload
+          //payload data
           const data = {
             summary: detail_string,
             details: detail_string,
@@ -68,7 +68,7 @@ class TeamsBot extends TeamsActivityHandler {
           });
 
           //test
-          await context.sendActivity(`You want to escalate to ${param1} which is - ${param1sub[0]} snd ${param1sub[1]}, escalation title - ${param2} and detaisl of incident - ${detail_string}`);
+          //await context.sendActivity(`You want to escalate to ${param1} which is - ${param1sub[0]} snd ${param1sub[1]}, escalation title - ${param2} and detaisl of incident - ${detail_string}`);
 
         }
 
@@ -79,6 +79,8 @@ class TeamsBot extends TeamsActivityHandler {
 
           const VICTOROPS_API_URL = 'https://api.victorops.com/api-public/v1';
 
+
+          //fetch response from VOps Public API
           const response = await axios.get(`${VICTOROPS_API_URL}/team`, {
             headers: { 'X-VO-Api-Id': '<YOUR_API_ID>', 'X-VO-Api-Key': 'YOUR_API_KEY' }
           });
