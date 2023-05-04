@@ -1,3 +1,3 @@
 # MSTeams VictorOps Bot 
 
-![alt text](requirement.PNG)
+![alt text](bot/images/requirement.png)
