@@ -46,7 +46,7 @@ class TeamsBot extends TeamsActivityHandler {
           //looping through each routingKey - creating a new incident for each routing key
           routingKeys.forEach((routingKey) => {
             const options = {
-              url: ``,
+              url: `https://alert.victorops.com/integrations/generic/20131114/alert/<YOUR_REST_API_KEY>/${routingKey}`,
               method: 'POST',
               headers: {
                 'X-VO-Api-Id': 'YOUR_API_ID',
