@@ -14,16 +14,13 @@ class TeamsBot extends TeamsActivityHandler {
 
     this.onMessage(async (context, next) => {
 
-
-
-
       //FEATURE - SHOW TEAMS IN VICTOROPS under the Vesta org
       if (context.activity.text === '/vops-show-teams') {
 
         const VICTOROPS_API_URL = 'https://api.victorops.com/api-public/v1';
 
         const response = await axios.get(`${VICTOROPS_API_URL}/team`, {
-          headers: {  }
+          headers: { 'X-VO-Api-Id': '<YOUR_API_ID>', 'X-VO-Api-Key': 'YOUR_API_KEY' }
         });
 
         // Extract the team names from the response
